@@ -1,0 +1,32 @@
+{
+  "name": "release-element",
+  "authors": [
+    "Charbel Rami"
+  ],
+  "description": "",
+  "main": "release-element.html",
+  "moduleType": [],
+  "keywords": [
+    "release",
+    "git",
+    "github",
+    "api",
+    "polymer",
+    "custom-element",
+    "web-components"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax#~1.1.1",
+    "polymer": "~1.2.3",
+    "marked-element": "PolymerElements/marked-element#~1.1.1"
+  }
+}

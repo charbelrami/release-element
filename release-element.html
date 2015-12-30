@@ -1,0 +1,65 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../marked-element/marked-element.html">
+
+<dom-module id="release-element">
+  <template>
+    <iron-ajax url="https://api.github.com/repos/{{owner}}/{{repo}}/releases" handle-as="json" last-response="{{data}}" auto></iron-ajax>
+
+    <template is="dom-if" if="{{name}}">
+      {{release.name}}
+    </template>
+
+    <template is="dom-if" if="{{desc}}">
+      <marked-element markdown="{{release.body}}">
+        <div class="markdown-html"></div>
+      </marked-element>
+    </template>
+
+    <template is="dom-if" if="{{url}}">
+      {{release.html_url}}
+    </template>
+
+    <template is="dom-if" if="{{zip}}">
+      {{release.zipball_url}}
+    </template>
+
+    <template is="dom-if" if="{{tar}}">
+      {{release.tarball_url}}
+    </template>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'release-element',
+
+        properties: {
+          owner: String,
+          repo: String,
+          releaseIndex: {
+            type: Number,
+            value: 0
+          },
+          name: Boolean,
+          desc: Boolean,
+          url: Boolean,
+          zip: Boolean,
+          tar: Boolean
+        },
+
+        observers: [
+          '_getRelease(data.*)'
+        ],
+
+        _getRelease: function(obj) {
+          console.log(obj);
+          var keys = Object.keys(obj);
+          this.release = obj[keys[1]][this.releaseIndex];
+        }
+      });
+    }());
+  </script>
+</dom-module>
